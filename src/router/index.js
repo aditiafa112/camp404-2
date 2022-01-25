@@ -14,6 +14,11 @@ const Router = () => {
           component={Pages.Login}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="Home"
+          component={Pages.Home}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

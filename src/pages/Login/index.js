@@ -2,12 +2,14 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Assets from '../../assets';
 
-const Login = () => {
+const Login = ({navigation}) => {
   return (
     <View style={styles.page}>
       <Image source={Assets.ICLogo} style={styles.logo} />
       <Text style={styles.logoText}>Camp404 store</Text>
-      <TouchableOpacity style={styles.btnLogin}>
+      <TouchableOpacity
+        style={styles.btnLogin}
+        onPress={() => navigation.navigate('Home')}>
         <Image source={Assets.ICGoogle} style={styles.imgGoogle} />
         <Text style={styles.btnText}>Continue with google</Text>
       </TouchableOpacity>
