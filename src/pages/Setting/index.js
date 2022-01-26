@@ -8,7 +8,9 @@ const Setting = ({navigation}) => {
     <View style={styles.page}>
       <Header title={'Home'} />
       <View style={styles.setting}>
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => navigation.navigate('SettingBanner')}>
           <Text style={styles.itemText}>Setting Banner</Text>
           <Image source={Assets.ICRightArrow} style={styles.icon} />
         </TouchableOpacity>
