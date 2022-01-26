@@ -7,6 +7,7 @@ const Assets = {
   ICCircleMinus: require('./circle-minus.png'),
   ICCirclePlus: require('./circle-plus.png'),
   ICTrash: require('./trash.png'),
+  ICCircleSuccess: require('./circle-success.png'),
 };
 
 export default Assets;

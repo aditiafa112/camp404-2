@@ -1,26 +1,40 @@
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import ModalSuccess from '../ModalSuccess';
 
 const CartButton = ({totalPrice}) => {
+  const [modal, setModal] = useState(false);
   const handleCheckout = () => {
     Alert.alert('Checkout your product', 'Are you sure?', [
       {
         text: 'Cancel',
       },
-      {text: 'OK', onPress: () => {}},
+      {
+        text: 'OK',
+        onPress: () => {
+          setModal(true);
+        },
+      },
     ]);
   };
 
+  const modalCallback = () => {
+    setModal(!modal);
+  };
+
   return (
-    <View style={styles.cartButton}>
-      <View style={styles.content}>
-        <Text style={styles.label}>Total Price</Text>
-        <Text style={styles.price}>Rp. {totalPrice}</Text>
+    <>
+      <View style={styles.cartButton}>
+        <View style={styles.content}>
+          <Text style={styles.label}>Total Price</Text>
+          <Text style={styles.price}>Rp. {totalPrice}</Text>
+        </View>
+        <TouchableOpacity style={styles.btn} onPress={handleCheckout}>
+          <Text style={styles.btnText}>Checkout</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.btn} onPress={handleCheckout}>
-        <Text style={styles.btnText}>Checkout</Text>
-      </TouchableOpacity>
-    </View>
+      <ModalSuccess visible={modal} callback={modalCallback} />
+    </>
   );
 };
 
@@ -50,7 +64,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     justifyContent: 'center',
-    alignSelf:'center',
+    alignSelf: 'center',
     height: 33,
     backgroundColor: '#FFC107',
     borderRadius: 8,
