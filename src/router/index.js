@@ -19,6 +19,11 @@ const MainTab = () => {
         component={Pages.Cart}
         options={{headerShown: false}}
       />
+      <Tab.Screen
+        name="Setting"
+        component={Pages.Setting}
+        options={{headerShown: false}}
+      />
     </Tab.Navigator>
   );
 };
