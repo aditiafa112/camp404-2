@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Header, SettingCard} from '../../components';
+import {FAB, Header, SettingCard} from '../../components';
 
 const imgDummy = [
   {
@@ -30,6 +30,9 @@ const SettingBanner = () => {
           })}
         <View style={styles.gap} />
       </ScrollView>
+      <View style={styles.fabWrapper}>
+        <FAB />
+      </View>
     </View>
   );
 };
@@ -51,5 +54,10 @@ const styles = StyleSheet.create({
   },
   gap: {
     height: 30,
+  },
+  fabWrapper: {
+    position: 'absolute',
+    bottom: 77,
+    right: 31,
   },
 });
