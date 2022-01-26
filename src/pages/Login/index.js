@@ -9,7 +9,7 @@ const Login = ({navigation}) => {
       <Text style={styles.logoText}>Camp404 store</Text>
       <TouchableOpacity
         style={styles.btnLogin}
-        onPress={() => navigation.navigate('Home')}>
+        onPress={() => navigation.navigate('MainTab')}>
         <Image source={Assets.ICGoogle} style={styles.imgGoogle} />
         <Text style={styles.btnText}>Continue with google</Text>
       </TouchableOpacity>
