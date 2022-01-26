@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {CartItem, Header} from '../../components';
+import {CartButton, CartItem, Header} from '../../components';
 
 const productDummy = [
   {
@@ -45,9 +45,11 @@ const Cart = () => {
               </View>
             );
           })}
-
         <View style={styles.gap}></View>
       </ScrollView>
+      <View style={styles.btnWrapper}>
+        <CartButton totalPrice={50000} />
+      </View>
     </View>
   );
 };
@@ -70,5 +72,9 @@ const styles = StyleSheet.create({
   },
   gap: {
     height: 100,
+  },
+  btnWrapper: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
   },
 });
