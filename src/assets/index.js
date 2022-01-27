@@ -10,6 +10,7 @@ const Assets = {
   ICCircleSuccess: require('./circle-success.png'),
   ICRightArrow: require('./right-arrow.png'),
   ICFAB: require('./fab.png'),
+  ICPlush: require('./plus.png'),
 };
 
 export default Assets;

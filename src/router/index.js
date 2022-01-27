@@ -49,6 +49,11 @@ const Router = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="SettingBannerAdd"
+          component={Pages.SettingBannerAdd}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="SettingProduct"
           component={Pages.SettingProduct}
           options={{headerShown: false}}
