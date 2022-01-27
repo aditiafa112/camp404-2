@@ -14,7 +14,9 @@ const Setting = ({navigation}) => {
           <Text style={styles.itemText}>Setting Banner</Text>
           <Image source={Assets.ICRightArrow} style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => navigation.navigate('SettingProduct')}>
           <Text style={styles.itemText}>Setting Product</Text>
           <Image source={Assets.ICRightArrow} style={styles.icon} />
         </TouchableOpacity>

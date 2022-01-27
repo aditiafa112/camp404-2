@@ -48,6 +48,11 @@ const Router = () => {
           component={Pages.SettingBanner}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="SettingProduct"
+          component={Pages.SettingProduct}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
