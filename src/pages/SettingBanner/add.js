@@ -11,10 +11,12 @@ import {
 import Assets from '../../assets';
 import {Header} from '../../components';
 import {launchImageLibrary} from 'react-native-image-picker';
+import ModalSuccess from '../../components/ModalSuccess';
 
 const SettingBannerAdd = () => {
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
+  const [modal, setModal] = useState(false);
 
   const handleImage = async () => {
     await launchImageLibrary(
@@ -37,6 +39,25 @@ const SettingBannerAdd = () => {
         }
       },
     );
+  };
+
+  const handleSave = () => {
+    console.log('jalo');
+    Alert.alert('Save your product', 'Are you sure?', [
+      {
+        text: 'Cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          setModal(true);
+        },
+      },
+    ]);
+  };
+
+  const modalCallback = () => {
+    setModal(!modal);
   };
 
   return (
@@ -71,10 +92,11 @@ const SettingBannerAdd = () => {
         )}
       </View>
       <View style={styles.inputGroup}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={handleSave}>
           <Text style={styles.btnText}>Save</Text>
         </TouchableOpacity>
       </View>
+      <ModalSuccess visible={modal} callback={modalCallback} />
     </View>
   );
 };
