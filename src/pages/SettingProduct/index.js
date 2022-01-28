@@ -47,7 +47,7 @@ const SettingProduct = () => {
         <View style={styles.gap} />
       </ScrollView>
       <View style={styles.fabWrapper}>
-        <FAB />
+        <FAB type='product' />
       </View>
     </View>
   );

@@ -58,6 +58,11 @@ const Router = () => {
           component={Pages.SettingProduct}
           options={{headerShown: false}}
         />
+          <Stack.Screen
+          name="SettingProductAdd"
+          component={Pages.SettingProductAdd}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
