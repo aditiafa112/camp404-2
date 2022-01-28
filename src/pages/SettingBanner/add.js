@@ -42,8 +42,7 @@ const SettingBannerAdd = () => {
   };
 
   const handleSave = () => {
-    console.log('jalo');
-    Alert.alert('Save your product', 'Are you sure?', [
+    Alert.alert('Save your banner', 'Are you sure?', [
       {
         text: 'Cancel',
       },

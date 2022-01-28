@@ -26,7 +26,7 @@ const SettingProductAdd = () => {
         mediaType: 'photo',
         includeBase64: true,
         quality: 0.8,
-        maxWidth: 500,
+        maxWidth: 250,
         maxHeight: 250,
       },
       response => {
@@ -44,7 +44,6 @@ const SettingProductAdd = () => {
   };
 
   const handleSave = () => {
-    console.log('jalo');
     Alert.alert('Save your product', 'Are you sure?', [
       {
         text: 'Cancel',
@@ -170,11 +169,11 @@ const styles = StyleSheet.create({
     height: 40,
   },
   previewImageWrapper: {
-    width: 250,
+    width: 125,
     height: 125,
   },
   previewImage: {
-    width: 250,
+    width: 125,
     height: 125,
   },
   btn: {
@@ -190,3 +189,4 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
+
