@@ -6,6 +6,7 @@ import SettingBanner from './SettingBanner';
 import SettingProduct from './SettingProduct';
 import SettingBannerAdd from './SettingBanner/add';
 import SettingProductAdd from './SettingProduct/add';
+import SettingProductEdit from './SettingProduct/edit';
 
 export {
   Login,
@@ -16,4 +17,5 @@ export {
   SettingProduct,
   SettingBannerAdd,
   SettingProductAdd,
+  SettingProductEdit,
 };

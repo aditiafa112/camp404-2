@@ -1,7 +1,9 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
-const SettingCard = ({type = 'banner', id, img, title}) => {
+const SettingCard = ({type = 'banner', id, img, title, desc, price}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.settingCard}>
       <Image source={{uri: img}} style={styles.img(type)} resizeMode="cover" />
@@ -9,7 +11,17 @@ const SettingCard = ({type = 'banner', id, img, title}) => {
         <Text style={styles.title}>{title}</Text>
         <View style={styles.actionGroup}>
           {type === 'product' && (
-            <TouchableOpacity style={[styles.btn, styles.btnEdit]}>
+            <TouchableOpacity
+              style={[styles.btn, styles.btnEdit]}
+              onPress={() =>
+                navigation.navigate('SettingProductEdit', {
+                  id,
+                  img,
+                  title,
+                  desc,
+                  price,
+                })
+              }>
               <Text style={styles.btnText}>Edit</Text>
             </TouchableOpacity>
           )}

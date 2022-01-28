@@ -39,6 +39,8 @@ const SettingProduct = () => {
                   type={'product'}
                   id={item.id}
                   img={item.img}
+                  desc={item.desc}
+                  price={item.price}
                   title={item.title}
                 />
               </View>
