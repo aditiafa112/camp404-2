@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   StyleSheet,
   Text,
@@ -8,10 +9,28 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Assets from '../../assets';
+import apiLogin from '../../api/Auth/Login';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    if(!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
+      Alert.alert('Email tidak valid');
+      return;
+    }
+    if(password.length < 6){
+      Alert.alert('Password kurang dari 6 digit');
+      return;
+    }
+
+    const tryLogin = await apiLogin(email, password);
+    if (tryLogin) {
+      navigation.navigate('MainTab');
+    }
+  };
+
   return (
     <View style={styles.page}>
       <Image source={Assets.ICLogo} style={styles.logo} />
@@ -30,9 +49,7 @@ const Login = ({navigation}) => {
           secureTextEntry
           placeholder="Password"
         />
-        <TouchableOpacity
-          style={styles.btnLogin}
-          onPress={() => navigation.navigate('MainTab')}>
+        <TouchableOpacity style={styles.btnLogin} onPress={handleLogin}>
           <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity>
       </View>
