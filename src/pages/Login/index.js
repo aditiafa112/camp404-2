@@ -1,18 +1,41 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useState} from 'react';
 import Assets from '../../assets';
 
 const Login = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.page}>
       <Image source={Assets.ICLogo} style={styles.logo} />
       <Text style={styles.logoText}>Camp404 store</Text>
-      <TouchableOpacity
-        style={styles.btnLogin}
-        onPress={() => navigation.navigate('MainTab')}>
-        <Image source={Assets.ICGoogle} style={styles.imgGoogle} />
-        <Text style={styles.btnText}>Continue with google</Text>
-      </TouchableOpacity>
+      <View style={styles.form}>
+        <TextInput
+          style={styles.input}
+          onChangeText={setEmail}
+          value={email}
+          placeholder="Email"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry
+          placeholder="Password"
+        />
+        <TouchableOpacity
+          style={styles.btnLogin}
+          onPress={() => navigation.navigate('MainTab')}>
+          <Text style={styles.btnText}>Login</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -38,23 +61,26 @@ const styles = StyleSheet.create({
     color: '#F2F2F2',
     marginBottom: 58,
   },
-  btnLogin: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  form: {
+    marginHorizontal: 16,
+    width: '100%',
+    paddingHorizontal: 16,
+  },
+  input: {
     backgroundColor: '#fff',
     borderRadius: 8,
-    width: '100%',
-    maxWidth: 300,
+    marginBottom: 16,
+    paddingHorizontal: 16,
   },
-  imgGoogle: {
-    width: 36,
-    aspectRatio: 1,
-    marginHorizontal: 12,
-    marginVertical: 6,
+  btnLogin: {
+    backgroundColor: '#25AE88',
+    borderRadius: 8,
+    paddingVertical: 13,
+    alignItems: 'center',
   },
   btnText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#4E4D4D',
+    color: '#fff',
   },
 });
