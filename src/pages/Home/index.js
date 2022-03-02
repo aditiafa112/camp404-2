@@ -2,37 +2,17 @@ import React from 'react';
 import {FlatList, StyleSheet, View, Text} from 'react-native';
 import {Card, Carousel, Header} from '../../components';
 import {apiGetListBanner} from '../../api/Banner';
-
-const productDummy = [
-  {
-    id: 1,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting ...',
-    price: 10000,
-  },
-  {
-    id: 2,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting ...',
-    price: 30000,
-  },
-  {
-    id: 3,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting ...',
-    price: 30000,
-  },
-];
+import {apiGetListMaterial} from '../../api/Material';
 
 const Home = () => {
   const [banner, setBanner] = React.useState([]);
+  const [product, setProduct] = React.useState([]);
 
   const getInitialValue = async () => {
     const newBanner = await apiGetListBanner();
     setBanner(newBanner)
+    const newProduct = await apiGetListMaterial();
+    setProduct(newProduct)
   };
 
   React.useEffect(() => {
@@ -54,15 +34,15 @@ const Home = () => {
         ListFooterComponent={() => {
           return  <View style={styles.separator} />
         }}
-        data={productDummy}
+        data={product}
         renderItem={({item}) => {
           return (
             <Card
               id={item.id}
-              img={item.img}
-              title={item.title}
-              desc={item.desc}
-              price={item.price}
+              img={item.gambar}
+              title={item.nama_barang}
+              desc={item.deskripsi}
+              price={item.harga}
             />
           );
         }}
