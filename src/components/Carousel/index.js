@@ -42,7 +42,7 @@ const Carousel = ({list}) => {
               <Image
                 style={styles.backgroundImage}
                 source={{
-                  uri: image.url,
+                  uri: image.photo,
                 }}
                 key={image.id}
                 resizeMode={'cover'}

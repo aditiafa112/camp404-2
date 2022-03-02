@@ -1,17 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, View, Text} from 'react-native';
 import {Card, Carousel, Header} from '../../components';
-
-const imgDummy = [
-  {
-    id: 1,
-    url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
-  },
-  {
-    id: 2,
-    url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80',
-  },
-];
+import {apiGetListBanner} from '../../api/Banner';
 
 const productDummy = [
   {
@@ -38,6 +28,17 @@ const productDummy = [
 ];
 
 const Home = () => {
+  const [banner, setBanner] = React.useState([]);
+
+  const getInitialValue = async () => {
+    const newBanner = await apiGetListBanner();
+    setBanner(newBanner)
+  };
+
+  React.useEffect(() => {
+    getInitialValue();
+  }, []);
+
   return (
     <View style={styles.page}>
       <Header title={'Home'} />
@@ -45,7 +46,7 @@ const Home = () => {
         ListHeaderComponent={() => {
           return (
             <>
-              <Carousel list={imgDummy} />
+              {banner.length > 0 && <Carousel list={banner} />}
               <Text style={styles.listProduct}>List Product</Text>
             </>
           );
