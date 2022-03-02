@@ -12,8 +12,9 @@ import Assets from '../../assets';
 import {Header} from '../../components';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ModalSuccess from '../../components/ModalSuccess';
+import {apiPostBanner} from '../../api/Banner';
 
-const SettingBannerAdd = () => {
+const SettingBannerAdd = ({navigation}) => {
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [modal, setModal] = useState(false);
@@ -42,14 +43,24 @@ const SettingBannerAdd = () => {
   };
 
   const handleSave = () => {
+    if (name === '' || image === '') {
+      Alert.alert('Peringatan', 'Data tidak boleh kosong!!!');
+      return;
+    }
     Alert.alert('Save your banner', 'Are you sure?', [
       {
         text: 'Cancel',
       },
       {
         text: 'OK',
-        onPress: () => {
-          setModal(true);
+        onPress: async () => {
+          const saveBanner = await apiPostBanner(
+            name,
+            `data:${image?.assets[0]?.type};base64,${image?.assets[0]?.base64}`,
+          );
+          if(saveBanner){
+            setModal(true);
+          }
         },
       },
     ]);
@@ -57,6 +68,7 @@ const SettingBannerAdd = () => {
 
   const modalCallback = () => {
     setModal(!modal);
+    navigation.goBack();
   };
 
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {FAB, Header, SettingCard} from '../../components';
 import {apiGetListBanner} from '../../api/Banner';
+import { useFocusEffect } from '@react-navigation/native';
 
 const SettingBanner = () => {
   const [banner, setBanner] = React.useState([]);
@@ -11,9 +12,11 @@ const SettingBanner = () => {
     setBanner(newBanner);
   };
 
-  React.useEffect(() => {
-    getInitialValue();
-  },[])
+  useFocusEffect(
+    React.useCallback(() => {
+      getInitialValue();
+    }, [])
+  );
 
   return (
     <View style={styles.page}>
