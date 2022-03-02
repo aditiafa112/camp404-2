@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {FAB, Header, SettingCard} from '../../components';
-import {apiGetListBanner} from '../../api/Banner';
+import {apiGetListBanner, apiDeleteBanner} from '../../api/Banner';
 import { useFocusEffect } from '@react-navigation/native';
 
 const SettingBanner = () => {
@@ -18,6 +18,13 @@ const SettingBanner = () => {
     }, [])
   );
 
+  const deleteSelectedBanner = async id => {
+    const removeBanner = await apiDeleteBanner(id);
+   if(removeBanner){
+    getInitialValue();
+   }
+  };
+
   return (
     <View style={styles.page}>
       <Header title={'Setting Banner'} />
@@ -26,7 +33,12 @@ const SettingBanner = () => {
           banner.map((item, index) => {
             return (
               <View key={index} style={styles.separator}>
-                <SettingCard id={item.id} img={item.photo} title={item.title} />
+                <SettingCard
+                  id={item.id}
+                  img={item.photo}
+                  title={item.title}
+                  onPressDelete={() => deleteSelectedBanner(item.id)}
+                />
               </View>
             );
           })}

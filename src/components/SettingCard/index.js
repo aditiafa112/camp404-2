@@ -2,7 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-const SettingCard = ({type = 'banner', id, img, title, desc, price}) => {
+const SettingCard = ({type = 'banner', id, img, title, desc, price, onPressDelete}) => {
   const navigation = useNavigation();
   return (
     <View style={styles.settingCard}>
@@ -25,7 +25,7 @@ const SettingCard = ({type = 'banner', id, img, title, desc, price}) => {
               <Text style={styles.btnText}>Edit</Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity style={[styles.btn, styles.btnDelete]}>
+          <TouchableOpacity style={[styles.btn, styles.btnDelete]} onPress={onPressDelete}>
             <Text style={styles.btnText}>Delete</Text>
           </TouchableOpacity>
         </View>
