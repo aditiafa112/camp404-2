@@ -10,6 +10,7 @@ import {
 import React, {useState} from 'react';
 import Assets from '../../assets';
 import apiLogin from '../../api/Auth/Login';
+import { storeData } from '../../utils/AsyncStorage';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -27,6 +28,7 @@ const Login = ({navigation}) => {
 
     const tryLogin = await apiLogin(email, password);
     if (tryLogin) {
+      await storeData("access_token", tryLogin.access_token);
       navigation.navigate('MainTab');
     }
   };
