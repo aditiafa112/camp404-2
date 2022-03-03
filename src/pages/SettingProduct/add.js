@@ -12,8 +12,9 @@ import Assets from '../../assets';
 import {Header} from '../../components';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ModalSuccess from '../../components/ModalSuccess';
+import {apiPostMaterial} from '../../api/Material';
 
-const SettingProductAdd = () => {
+const SettingProductAdd = ({navigation}) => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [price, setPrice] = useState('');
@@ -44,14 +45,26 @@ const SettingProductAdd = () => {
   };
 
   const handleSave = () => {
+    if (name === '' || desc === '' || price === '' || image === '') {
+      Alert.alert('Peringatan', 'Data tidak boleh kosong!!!');
+      return;
+    }
     Alert.alert('Save your product', 'Are you sure?', [
       {
         text: 'Cancel',
       },
       {
         text: 'OK',
-        onPress: () => {
-          setModal(true);
+        onPress: async () => {
+          const saveProduct = await apiPostMaterial(
+            name,
+            desc,
+            price,
+            `data:${image?.assets[0]?.type};base64,${image?.assets[0]?.base64}`,
+          );
+          if(saveProduct){
+            setModal(true);
+          }
         },
       },
     ]);
@@ -59,6 +72,7 @@ const SettingProductAdd = () => {
 
   const modalCallback = () => {
     setModal(!modal);
+    navigation.goBack();
   };
 
   return (
@@ -189,4 +203,3 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-
