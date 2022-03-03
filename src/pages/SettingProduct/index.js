@@ -1,47 +1,38 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {FAB, Header, SettingCard} from '../../components';
-
-const productDummy = [
-  {
-    id: 1,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting ...',
-    price: 10000,
-  },
-  {
-    id: 2,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting ...',
-    price: 30000,
-  },
-  {
-    id: 3,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting ...',
-    price: 30000,
-  },
-];
+import {apiGetListMaterial} from '../../api/Material';
+import {useFocusEffect} from '@react-navigation/native';
 
 const SettingProduct = () => {
+  const [product, setProduct] = React.useState([]);
+
+  const getInitialValue = async () => {
+    const newProduct = await apiGetListMaterial();
+    setProduct(newProduct);
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getInitialValue();
+    }, [])
+  );
+
   return (
     <View style={styles.page}>
       <Header title={'Setting Product'} />
       <ScrollView style={styles.scrollView}>
-        {Array.isArray(productDummy) &&
-          productDummy.map((item, index) => {
+        {Array.isArray(product) &&
+          product.map((item, index) => {
             return (
               <View key={index} style={styles.separator}>
                 <SettingCard
                   type={'product'}
                   id={item.id}
-                  img={item.img}
-                  desc={item.desc}
-                  price={item.price}
-                  title={item.title}
+                  img={item.gambar}
+                  desc={item.deskripsi}
+                  price={item.harga}
+                  title={item.nama_barang}
                 />
               </View>
             );
