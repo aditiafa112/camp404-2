@@ -12,8 +12,9 @@ import Assets from '../../assets';
 import {Header} from '../../components';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ModalSuccess from '../../components/ModalSuccess';
+import {apiPatchMaterial} from '../../api/Material';
 
-const SettingProductEdit = ({route}) => {
+const SettingProductEdit = ({navigation, route}) => {
   const [name, setName] = useState(route.params.title);
   const [desc, setDesc] = useState(route.params.desc);
   const [price, setPrice] = useState(route.params.price.toString());
@@ -44,14 +45,31 @@ const SettingProductEdit = ({route}) => {
   };
 
   const handleUpdate = () => {
+    if (name === '' || desc === '' || price === '') {
+      Alert.alert('Peringatan', 'Data tidak boleh kosong!!!');
+      return;
+    }
     Alert.alert('update your product', 'Are you sure?', [
       {
         text: 'Cancel',
       },
       {
         text: 'OK',
-        onPress: () => {
-          setModal(true);
+        onPress: async () => {
+          const newImage = Array.isArray(image?.assets)
+            ?  `data:${image?.assets[0]?.type};base64,${image?.assets[0]?.base64}`
+            : route.params.img;
+
+          const saveProduct = await apiPatchMaterial(
+            route.params.id,
+            name,
+            desc,
+            price,
+            newImage,
+          );
+          if (saveProduct) {
+            setModal(true);
+          }
         },
       },
     ]);
@@ -59,6 +77,7 @@ const SettingProductEdit = ({route}) => {
 
   const modalCallback = () => {
     setModal(!modal);
+    navigation.goBack();
   };
 
   return (
