@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 import React from 'react';
 
-const Card = ({id, img, title, desc, price}) => {
+const Card = ({id, img, title, desc, price, onPressAdd}) => {
   return (
     <View style={styles.card}>
       <Image
@@ -15,7 +15,7 @@ const Card = ({id, img, title, desc, price}) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.desc}>{desc}</Text>
         <Text style={styles.price}>Rp {price},-</Text>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={onPressAdd}>
           <Text style={styles.btnText}>Add</Text>
         </TouchableOpacity>
       </View>

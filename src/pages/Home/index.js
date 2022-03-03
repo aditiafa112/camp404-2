@@ -1,10 +1,13 @@
 import React from 'react';
-import {FlatList, StyleSheet, View, Text} from 'react-native';
+import {FlatList, StyleSheet, View, Text, ToastAndroid} from 'react-native';
 import {Card, Carousel, Header} from '../../components';
 import {apiGetListBanner} from '../../api/Banner';
 import {apiGetListMaterial} from '../../api/Material';
+import {useDispatch} from 'react-redux';
+import {addToCart} from '../../redux/actions/Cart';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const [banner, setBanner] = React.useState([]);
   const [product, setProduct] = React.useState([]);
 
@@ -43,6 +46,14 @@ const Home = () => {
               title={item.nama_barang}
               desc={item.deskripsi}
               price={item.harga}
+              onPressAdd={() => {
+                dispatch(addToCart(item));
+                ToastAndroid.show(
+                  `${item.nama_barang} Ditambahkan ke keranjang`,
+                  ToastAndroid.BOTTOM,
+                  ToastAndroid.SHORT,
+                );
+              }}
             />
           );
         }}

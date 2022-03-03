@@ -1,8 +1,16 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Assets from '../../assets';
+import {useDispatch} from 'react-redux';
+import {
+  removeFromCart,
+  addQtyFromCart,
+  removeQtyFromCart,
+} from '../../redux/actions/Cart';
 
 const CartItem = ({id, img, title, price, qty}) => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.cartItem}>
       <Image
@@ -16,17 +24,27 @@ const CartItem = ({id, img, title, price, qty}) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.price}>Rp {price},-</Text>
         <View style={styles.actionGroup}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(removeFromCart(id));
+            }}>
             <Image
               source={Assets.ICTrash}
               style={[styles.icon, styles.iconTrash]}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            disabled={qty <= 0}
+            onPress={() => {
+              dispatch(removeQtyFromCart(id));
+            }}>
             <Image source={Assets.ICCircleMinus} style={styles.icon} />
           </TouchableOpacity>
           <Text style={styles.qty}>{qty}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(addQtyFromCart(id));
+            }}>
             <Image source={Assets.ICCirclePlus} style={styles.icon} />
           </TouchableOpacity>
         </View>

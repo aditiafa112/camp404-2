@@ -1,45 +1,24 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {CartButton, CartItem, Header} from '../../components';
-
-const productDummy = [
-  {
-    id: 1,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    price: 10000,
-    qty: 2,
-  },
-  {
-    id: 2,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    price: 30000,
-    qty: 5,
-  },
-  {
-    id: 3,
-    img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
-    title: 'Nama Product',
-    price: 30000,
-    qty: 3,
-  },
-];
+import {useSelector} from 'react-redux';
 
 const Cart = () => {
+  const cartRedux = useSelector(state => state.cart);
+
   return (
     <View style={styles.page}>
       <Header title={'Cart'} />
       <ScrollView style={styles.scrollview}>
-        {Array.isArray(productDummy) &&
-          productDummy.map((item, index) => {
+        {Array.isArray(cartRedux.listCart) &&
+          cartRedux.listCart.map((item, index) => {
             return (
               <View key={index} style={styles.separator}>
                 <CartItem
                   id={item.id}
-                  img={item.img}
-                  title={item.title}
-                  price={item.price}
+                  img={item.gambar}
+                  title={item.nama_barang}
+                  price={item.harga}
                   qty={item.qty}
                 />
               </View>
@@ -48,7 +27,12 @@ const Cart = () => {
         <View style={styles.gap}></View>
       </ScrollView>
       <View style={styles.btnWrapper}>
-        <CartButton totalPrice={50000} />
+        <CartButton
+          totalPrice={cartRedux.listCart.reduce(
+            (previousValue, currentValue) => previousValue + (currentValue.qty * currentValue.harga),
+            0,
+          )}
+        />
       </View>
     </View>
   );
