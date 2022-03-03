@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {FAB, Header, SettingCard} from '../../components';
-import {apiGetListMaterial} from '../../api/Material';
+import {apiGetListMaterial, apiDeleteMaterial} from '../../api/Material';
 import {useFocusEffect} from '@react-navigation/native';
 
 const SettingProduct = () => {
@@ -18,6 +18,13 @@ const SettingProduct = () => {
     }, [])
   );
 
+  const deleteSelectedProduct = async id => {
+    const removeProduct = await apiDeleteMaterial(id);
+    if(removeProduct){
+      getInitialValue();
+    }
+  };
+  
   return (
     <View style={styles.page}>
       <Header title={'Setting Product'} />
@@ -33,6 +40,7 @@ const SettingProduct = () => {
                   desc={item.deskripsi}
                   price={item.harga}
                   title={item.nama_barang}
+                  onPressDelete={() => deleteSelectedProduct(item.id)}
                 />
               </View>
             );
