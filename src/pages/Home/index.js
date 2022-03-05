@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, View, Text, ToastAndroid} from 'react-native';
+import {FlatList, StyleSheet, View, Text, ToastAndroid, RefreshControl} from 'react-native';
 import {Card, Carousel, Header} from '../../components';
 import {apiGetListBanner} from '../../api/Banner';
 import {apiGetListMaterial} from '../../api/Material';
@@ -10,6 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const [banner, setBanner] = React.useState([]);
   const [product, setProduct] = React.useState([]);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   const getInitialValue = async () => {
     const newBanner = await apiGetListBanner();
@@ -22,15 +23,30 @@ const Home = () => {
     getInitialValue();
   }, []);
 
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    setBanner([]);
+    setProduct([]);
+    await getInitialValue();
+    setRefreshing(false);
+  }, []);
+
+
   return (
     <View style={styles.page}>
       <Header title={'Home'} />
       <FlatList
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
         ListHeaderComponent={() => {
           return (
             <>
               {banner.length > 0 && <Carousel list={banner} />}
-              <Text style={styles.listProduct}>List Product</Text>
+              {product.length > 0 && <Text style={styles.listProduct}>List Product</Text>}
             </>
           );
         }}
