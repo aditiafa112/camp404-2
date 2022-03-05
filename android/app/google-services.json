@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "684269568379",
+    "project_id": "campproject2-camp404",
+    "storage_bucket": "campproject2-camp404.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684269568379:android:a7e9dca4f6c15e18b5bdde",
+        "android_client_info": {
+          "package_name": "com.campproject2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684269568379-pmqv4p8d1pjo5v660k2a9i7tdskv0a3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSeEgNN_HFXfBLxQQgfSOH0btETOZdaZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684269568379-pmqv4p8d1pjo5v660k2a9i7tdskv0a3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
