@@ -2,8 +2,17 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Header} from '../../components';
 import Assets from '../../assets';
+import {removeData} from '../../utils/AsyncStorage';
 
 const Setting = ({navigation}) => {
+  const logout = () => {
+    removeData('access_token');
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Login'}],
+    });
+  };
+
   return (
     <View style={styles.page}>
       <Header title={'Home'} />
@@ -21,9 +30,9 @@ const Setting = ({navigation}) => {
           <Image source={Assets.ICRightArrow} style={styles.icon} />
         </TouchableOpacity>
       </View>
-      <View style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={logout}>
         <Text style={styles.btnText}>Logout</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
